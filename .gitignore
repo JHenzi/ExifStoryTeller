@@ -1,0 +1,117 @@
+# Stories directory
+stories/
+*.md
+!README.md
+!TODO.md
+!STORY_AGENT_README.md
+!WORLD_DOMINATION.MD
+!locations_format.txt
+!allCountries-format.txt
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temp files
+*.tmp
+*.temp
+*.log
+*.bak
+*.backup
+*.old
+
+# Archive files
+*.zip
+*.tar
+*.tar.gz
+*.gz
+
+# Large data files
+*.txt
+!locations_format.txt
+!allCountries-format.txt
+cities500.txt
+allCountries.txt
+
+# Sensitive files
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.env
+.env
+secrets/
+config.local.*
+metadata.md
+
+# Photos directory (if accidentally included)
+photos_backup/
+/Volumes/
+
+# Flask
+instance/
+.webassets-cache
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+

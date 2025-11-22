@@ -1,0 +1,21 @@
+| Field # | Name                | Description                                                              |
+| ------- | ------------------- | ------------------------------------------------------------------------ |
+| 1       | `geonameid`         | Unique integer ID for the location                                       |
+| 2       | `name`              | Name of the place (ASCII)                                                |
+| 3       | `asciiname`         | ASCII version of name (no special chars)                                 |
+| 4       | `alternatenames`    | Comma-separated list of alternate names / transliterations               |
+| 5       | `latitude`          | Decimal degrees, e.g., 36.1699                                           |
+| 6       | `longitude`         | Decimal degrees, e.g., -115.1398                                         |
+| 7       | `feature class`     | Single letter code indicating type (P=populated place, H=mountain, etc.) |
+| 8       | `feature code`      | More specific type (PPL=populated place, PPLA=capital, etc.)             |
+| 9       | `country code`      | ISO-3166 2-letter country code (e.g., US)                                |
+| 10      | `cc2`               | Alternate country codes (comma-separated)                                |
+| 11      | `admin1 code`       | State/province code                                                      |
+| 12      | `admin2 code`       | County code                                                              |
+| 13      | `admin3 code`       | Region code (optional)                                                   |
+| 14      | `admin4 code`       | Minor subdivision (optional)                                             |
+| 15      | `population`        | Population (integer)                                                     |
+| 16      | `elevation`         | In meters (optional)                                                     |
+| 17      | `dem`               | Digital elevation model (meters)                                         |
+| 18      | `timezone`          | IANA timezone (e.g., America/Los_Angeles)                                |
+| 19      | `modification date` | Date last modified in `YYYY-MM-DD`                                       |

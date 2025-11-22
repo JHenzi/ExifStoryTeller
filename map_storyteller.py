@@ -192,6 +192,7 @@ MAP_TEMPLATE = """
         #map {
             flex: 1;
             height: 100%;
+            position: relative;
         }
         .sidebar {
             width: 400px;
@@ -282,10 +283,20 @@ MAP_TEMPLATE = """
             font-size: 0.9em;
             color: #7f8c8d;
         }
+        .timeline-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            pointer-events: none;
+        }
         .timeline-container {
-            background: #2c3e50;
-            padding: 15px 20px;
+            background: rgba(44, 62, 80, 0.95);
+            padding: 15px 30px;
             border-top: 2px solid #3498db;
+            pointer-events: auto;
+            backdrop-filter: blur(5px);
         }
         .timeline-track {
             position: relative;
@@ -294,7 +305,7 @@ MAP_TEMPLATE = """
             background: #34495e;
             border-radius: 15px;
             cursor: pointer;
-            margin-bottom: 8px;
+            margin-top: 8px;
         }
         .timeline-handle {
             position: absolute;
@@ -304,7 +315,7 @@ MAP_TEMPLATE = """
             background: #e74c3c;
             border-radius: 15px;
             cursor: grab;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
             transform: translateX(-10px);
             transition: background 0.2s;
         }
@@ -319,6 +330,7 @@ MAP_TEMPLATE = """
             justify-content: space-between;
             color: #ecf0f1;
             font-size: 0.85em;
+            margin-bottom: 5px;
         }
         .loading {
             text-align: center;
@@ -330,30 +342,34 @@ MAP_TEMPLATE = """
 <body>
     <div class="container">
         <div class="main-content">
-            <div id="map"></div>
+            <div id="map">
+                <div class="timeline-overlay">
+                    <div class="timeline-container">
+                        <div class="timeline-labels">
+                            <span id="timeline-start">Start</span>
+                            <span id="timeline-end">End</span>
+                        </div>
+                        <div class="timeline-track" id="timeline-track">
+                            <div class="timeline-handle" id="timeline-handle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="sidebar">
-            <div class="sidebar-header">
-                <h1>Photo Journey</h1>
-                <div class="location-info" id="location-info">Loading...</div>
-            </div>
-            <div class="navigation">
-                <button class="nav-button" id="prev-btn" onclick="navigateLocation(-1)">← Previous</button>
-                <button class="nav-button" id="next-btn" onclick="navigateLocation(1)">Next →</button>
-            </div>
-            <div class="location-counter">
-                <span id="location-counter">Location 0 of 0</span>
-            </div>
-            <div class="photo-gallery" id="photo-gallery">
-                <div class="loading">Loading photos...</div>
-            </div>
-        </div>
-        <div class="timeline-container">
-            <div class="timeline-track" id="timeline-track">
-                <div class="timeline-handle" id="timeline-handle"></div>
-            </div>
-            <div class="timeline-labels">
-                <span id="timeline-start">Start</span>
-                <span id="timeline-end">End</span>
+                <div class="sidebar-header">
+                    <h1>Photo Journey</h1>
+                    <div class="location-info" id="location-info">Loading...</div>
+                </div>
+                <div class="navigation">
+                    <button class="nav-button" id="prev-btn" onclick="navigateLocation(-1)">← Previous</button>
+                    <button class="nav-button" id="next-btn" onclick="navigateLocation(1)">Next →</button>
+                </div>
+                <div class="location-counter">
+                    <span id="location-counter">Location 0 of 0</span>
+                </div>
+                <div class="photo-gallery" id="photo-gallery">
+                    <div class="loading">Loading photos...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -421,14 +437,42 @@ MAP_TEMPLATE = """
         // Parse datetime string to Date object
         function parseDateTime(dtString) {
             if (!dtString) return null;
-            // Handle formats: "2008:09:12 14:30:00" or "2008-09-12 14:30:00"
-            const normalized = dtString.replace(/:/g, '-').replace(' ', 'T');
-            // Try to parse, add timezone if needed
+            
+            // Handle EXIF format: "2008:09:12 14:30:00"
+            // Replace first two colons (date part) with dashes, keep space and time
+            let normalized = dtString;
+            if (dtString.includes(':')) {
+                // Replace colons in date part (first 10 chars) with dashes
+                const parts = dtString.split(' ');
+                if (parts.length >= 2) {
+                    const datePart = parts[0].replace(/:/g, '-');
+                    const timePart = parts[1];
+                    normalized = `${datePart}T${timePart}`;
+                } else {
+                    // Just date part
+                    normalized = dtString.replace(/:/g, '-');
+                }
+            } else if (dtString.includes(' ') && !dtString.includes('T')) {
+                // Format: "2008-09-12 14:30:00" - replace space with T
+                normalized = dtString.replace(' ', 'T');
+            }
+            
+            // Try to parse
             let date = new Date(normalized);
             if (isNaN(date.getTime())) {
-                // Fallback: try parsing as-is
-                date = new Date(dtString);
+                // Fallback: try manual parsing for "YYYY:MM:DD HH:MM:SS"
+                const regexPattern = '(\\d{4})[:/-](\\d{2})[:/-](\\d{2})\\s+(\\d{2}):(\\d{2}):(\\d{2})';
+                const match = dtString.match(new RegExp(regexPattern));
+                if (match) {
+                    const [, year, month, day, hour, minute, second] = match;
+                    date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 
+                                   parseInt(hour), parseInt(minute), parseInt(second));
+                } else {
+                    // Last fallback: try as-is
+                    date = new Date(dtString);
+                }
             }
+            
             return isNaN(date.getTime()) ? null : date;
         }
 

@@ -1,36 +1,37 @@
-# Image History - AI-Powered Photo Story Generator 🚀
+# Image History - Photo Metadata Extractor & Map-Based Storyteller 🗺️
 
-**Transform your photo collection into an AI-generated life story using LLM vision models, EXIF metadata, and geocoding. Build your own personal travel narrative with multimodal AI!**
+**Extract EXIF metadata from your photo collection, build a SQLite database with geocoding, and create an interactive map-based storyteller that follows your journey through locations with image galleries.**
 
 ![Story Viewer Screenshot](Screenshot.png)
 
-> **Perfect for AI enthusiasts, developers, and anyone who wants to explore the intersection of computer vision, LLMs, and personal data storytelling.**
+> **Perfect for visualizing your photo journey through time and space with an interactive map interface.**
 
 ## 🌟 What Makes This Awesome?
 
-This project combines **multimodal AI**, **computer vision**, and **geocoding** to automatically generate personalized travel narratives from your photo collection. It's a complete pipeline from raw images to beautiful web stories:
+This project extracts comprehensive EXIF metadata from your photo collection and creates an interactive map-based storyteller:
 
 1. **Extract EXIF metadata** from thousands of photos (GPS, camera settings, timestamps)
 2. **Geocode locations** using Geonames database for accurate place names
-3. **Generate AI stories** using vision-capable LLMs (LMStudio, OpenAI, etc.) with image understanding
-4. **Serve beautiful web interface** with Flask to browse your AI-generated life story
+3. **Build interactive map** showing your photo journey through locations
+4. **Navigate chronologically** through locations with image galleries
 
-### Why AI Developers Love This
+### ~~AI Story Generation~~ (TBD - On the Shelf)
 
-- 🤖 **Multimodal AI Integration**: Uses vision models to understand images + context
-- 📊 **Data-Driven Storytelling**: Feeds structured data logs to LLMs (no hallucination!)
-- 🗺️ **Geocoding & Location Intelligence**: Automatic location detection from GPS coordinates
-- 🎨 **Beautiful Web UI**: Flask-based viewer with responsive design
-- 🔄 **Fault-Tolerant Processing**: Resume capability, error handling, progress tracking
-- 📸 **EXIF Data Extraction**: Comprehensive metadata capture (camera, lens, GPS, etc.)
+~~The project previously included AI-powered story generation using vision-capable LLMs. This feature is currently on hold and may be revisited in the future.~~
+
+### Current Focus: Map-Based Storytelling
+
+- 🗺️ **Interactive Map**: Visualize your photo journey through locations
+- 📸 **Image Galleries**: Browse photos by location in chronological order
+- 🧭 **Location Navigation**: Click "next" to follow your path through time
+- 📊 **Data-Driven**: All based on actual GPS coordinates and EXIF metadata
 
 ## 🎯 Use Cases
 
-- **Personal Photo Archives**: Turn years of photos into a chronological life story
-- **Travel Journals**: Automatically document trips with AI-generated narratives
-- **AI Research Projects**: Study how vision models interpret personal photo collections
-- **Multimodal LLM Experiments**: Test different models (GPT-4V, Claude, local models)
-- **Data Visualization**: Explore your photo metadata with CSV exports and web interface
+- **Personal Photo Archives**: Visualize years of photos on an interactive map
+- **Travel Journals**: See your journey through locations with image galleries
+- **Location Analysis**: Understand where and when you took photos
+- **Chronological Exploration**: Follow your path through time and space
 
 ## 🚀 Quick Start
 
@@ -44,17 +45,9 @@ python app.py process --folder /path/to/your/photos
 # Example: /path/to/library7/ → library7.db
 ```
 
-### 2. Generate AI Stories with Vision Models
+### 2. ~~Generate AI Stories~~ (TBD - On the Shelf)
 
-```bash
-# Generate stories using LMStudio (or any OpenAI-compatible API)
-python story_agent.py --db library7.db \
-  --base-url http://192.168.1.220:1234/v1 \
-  --model your-model-name
-
-# Uses vision models to analyze images + metadata
-# Creates markdown files in stories/ directory
-```
+~~This feature is currently on hold.~~
 
 ### 3. View Your Stories in Web Interface
 
@@ -63,7 +56,7 @@ python story_agent.py --db library7.db \
 python story_viewer.py
 
 # Open browser to http://127.0.0.1:5000
-# Browse your AI-generated life story with image previews!
+# Browse your photo stories with image previews!
 ```
 
 ## 📖 Features
@@ -78,25 +71,35 @@ python story_viewer.py
 - ✅ **Multiple formats**: JPG, PNG, TIFF, RAW, HEIC, and more
 - ✅ **CSV export**: Flexible grouping by day, location, or both for data analysis
 
-### AI Story Generation (`story_agent.py`)
+### ~~AI Story Generation~~ (`story_agent.py`) - TBD, On the Shelf
 
-- ✅ **Vision model integration**: Feeds images to LLMs with base64 encoding
-- ✅ **Data-driven prompts**: Structured data logs prevent hallucination
-- ✅ **Context-aware narratives**: Maintains story continuity across segments
-- ✅ **Location-based chunking**: Groups photos by location and month
-- ✅ **EXIF context**: Includes camera settings, GPS, timestamps in prompts
-- ✅ **Metadata support**: Personal context (name, hometown) for personalized stories
-- ✅ **Chronological ordering**: Filters erroneous dates, sorts oldest to newest
-- ✅ **LMStudio compatible**: Works with local models or OpenAI API
+~~- ✅ Generate travel narratives from photo metadata using LLMs~~
+~~- ✅ Integrate with LMStudio and OpenAI-compatible APIs~~
+~~- ✅ Vision model support (base64 image encoding for JPG/PNG)~~
+~~- ✅ Data-driven story generation (structured data logs prevent hallucination)~~
+~~- ✅ Location and date-based photo chunking~~
+~~- ✅ Context-aware narrative generation (maintains story continuity)~~
+
+**Status**: This feature is currently on hold. Focus has shifted to map-based storytelling.
 
 ### Web Story Viewer (`story_viewer.py`)
 
-- ✅ **Beautiful Flask interface**: Responsive design, modern UI
+- ✅ **Flask-based web application**: Responsive design, modern UI
 - ✅ **Chronological index**: Browse all stories sorted by date
 - ✅ **Image previews**: Automatic photo lookup and display
 - ✅ **Individual story pages**: Full narrative with metadata
 - ✅ **Markdown rendering**: Clean story presentation
 - ✅ **Photo serving**: Direct image links from your photo archive
+
+### 🗺️ Map-Based Storyteller (Planned)
+
+- [ ] **Interactive map visualization**: Show photo locations on a map
+- [ ] **Location path**: Connect locations chronologically to show journey
+- [ ] **Image galleries**: Display all photos for each location
+- [ ] **Navigation controls**: "Next" button to move to next location chronologically
+- [ ] **Timeline integration**: Show date/time information for each location
+- [ ] **Location clustering**: Group nearby photos by location
+- [ ] **Route visualization**: Draw path between locations in chronological order
 
 ## 🛠️ Installation
 
@@ -108,9 +111,6 @@ pip install exifread flask
 
 # Optional: For better markdown rendering
 pip install markdown
-
-# Optional: For AI story generation
-pip install openai
 ```
 
 ### Geonames Database (Optional)
@@ -148,25 +148,9 @@ python app.py export --group-by-day --group-by-location
 python app.py export --output analysis.csv --group-by-day
 ```
 
-### AI Story Generation
+### ~~AI Story Generation~~ (TBD - On the Shelf)
 
-```bash
-# Basic story generation
-python story_agent.py --db library7.db
-
-# Custom LMStudio endpoint
-python story_agent.py --db library7.db \
-  --base-url http://localhost:1234/v1 \
-  --model llama-3
-
-# Custom metadata file
-python story_agent.py --db library7.db \
-  --metadata-file my_metadata.md
-
-# Custom stories directory
-python story_agent.py --db library7.db \
-  --stories-dir ./my_stories
-```
+~~This feature is currently on hold.~~
 
 ### Web Viewer
 
@@ -194,41 +178,30 @@ The SQLite database contains a `photos` table with:
 
 Plus a `locations` table for fast geocoding lookups (auto-imported from `cities500.txt`).
 
-## 🤖 AI Integration Details
+## 🗺️ Map-Based Storytelling (Planned)
 
-### How Story Generation Works
+### Vision
 
-1. **Photo Chunking**: Groups photos by location and month
-2. **Data Log Creation**: Formats structured logs with dates, locations, photo counts, EXIF data
-3. **Image Selection**: Randomly selects one JPG/PNG per location/month for vision model
-4. **LLM Prompting**: Sends data log + base64-encoded image to vision-capable model
-5. **Story Output**: Generates markdown files named `YYYY-MM-DD-SEQUENCE#-LOCATION.md`
+Create an interactive map-based storyteller that:
 
-### Supported AI Models
+1. **Displays locations on a map**: All photo locations plotted with markers
+2. **Shows chronological path**: Connects locations in time order
+3. **Image galleries per location**: Click a location to see all photos taken there
+4. **Navigation controls**: "Next" button moves to the next location chronologically
+5. **Timeline integration**: Shows date/time for each location visit
 
-- **LMStudio**: Local models with OpenAI-compatible API
-- **OpenAI GPT-4V**: Vision-capable models
-- **Claude 3**: Anthropic's vision models
-- **Any OpenAI-compatible API**: Custom endpoints supported
+### Technical Approach
 
-### Data-Driven Approach
-
-Instead of letting the LLM hallucinate, we feed it structured data:
-
-```
-11/12/2008 - Westwood, OH - 4 photos
-12/05/2008 - Cincinnati, OH - 5 photos
-1/10/2009 - Cheviot, OH - 29 photos
-
-photo.jpg
-EXIF: Camera: Canon EOS | Lens: 24-70mm | ISO: 400 | f/2.8 | ...
-```
-
-The LLM writes about **actual data**, not made-up events!
+- Use a mapping library (Leaflet, Mapbox, Google Maps)
+- Query database for unique locations sorted by first photo date
+- Group photos by location
+- Create chronological path between locations
+- Build image galleries for each location
+- Implement navigation to move through locations in time order
 
 ## 🎨 Web Interface Features
 
-The Flask viewer (`story_viewer.py`) provides:
+The Flask viewer (`story_viewer.py`) currently provides:
 
 - **Index Page**: Chronological list of all stories with metadata
 - **Story Pages**: Individual narratives with image previews
@@ -238,20 +211,9 @@ The Flask viewer (`story_viewer.py`) provides:
 
 ![Story Viewer Screenshot](Screenshot.png)
 
-*Browse your AI-generated life story with beautiful image previews*
+*Current web interface - map-based storyteller coming soon!*
 
 ## 🔧 Configuration
-
-### Metadata File (`metadata.md`)
-
-Create a `metadata.md` file for personalized context:
-
-```markdown
-Name: Joe
-Hometown: Cincinnati, OH
-```
-
-The story agent reads this to provide personal context to the LLM.
 
 ### Photo Path Configuration
 
@@ -269,13 +231,6 @@ PHOTOS_BASE_PATH = '/Volumes/E1999/photos_backup'
 - Ensure photo filenames match exactly (case-sensitive on some systems)
 - Photos are searched recursively in the base path
 
-### Story Generation Fails
-
-- Verify LMStudio/API endpoint is accessible
-- Check model name is correct
-- Ensure images are JPG/PNG (HEIC not supported by vision models)
-- Review error messages in console output
-
 ### Location Lookup Issues
 
 - Download `cities500.txt` from Geonames
@@ -286,48 +241,48 @@ PHOTOS_BASE_PATH = '/Volumes/E1999/photos_backup'
 
 - **EXIF extraction**: ~100-500 images/second (depends on file size)
 - **Location lookup**: Fast after initial database import (uses spatial indexes)
-- **Story generation**: Depends on LLM speed (local models: 10-30s per segment)
 - **Web viewer**: Instant page loads, fast image serving
 
-## 🎓 For AI Researchers & Developers
+## 🎓 For Developers
 
 This project demonstrates:
 
-- **Multimodal AI workflows**: Combining vision models with structured data
-- **Data-driven LLM prompting**: Reducing hallucination with structured inputs
+- **EXIF metadata extraction**: Comprehensive photo data parsing
 - **Geocoding integration**: Real-world location intelligence
 - **Fault-tolerant processing**: Production-ready error handling
-- **Web interface design**: Flask-based story presentation
+- **Web interface design**: Flask-based photo presentation
+- **Database optimization**: Spatial indexing for fast location queries
 
 **Perfect for:**
-- Studying how vision models interpret personal photo collections
-- Experimenting with different LLM providers and models
-- Building similar AI-powered storytelling applications
-- Learning multimodal AI integration patterns
+- Building photo management systems
+- Learning EXIF data extraction
+- Understanding geocoding and location services
+- Creating map-based visualizations
+- Building chronological photo explorers
 
 ## 📝 License & Credits
 
 - Uses [Geonames](https://www.geonames.org/) database for location data
-- Compatible with [LMStudio](https://lmstudio.ai/) for local LLM inference
-- Built with Python, Flask, SQLite, and modern AI APIs
+- Built with Python, Flask, SQLite
 
 ## 🤝 Contributing
 
 This is a personal project, but feel free to:
 - Fork and adapt for your own photo collections
-- Experiment with different LLM models and prompts
-- Build additional features (timeline visualization, search, etc.)
-- Share your AI-generated stories!
+- Build the map-based storyteller feature
+- Add additional visualization features
+- Share your implementations!
 
 ## 🔗 Related Projects
 
-Looking for more AI-powered photo projects? Check out:
-- [Awesome AI](https://github.com/sindresorhus/awesome#artificial-intelligence) - Curated AI resources
-- Vision model benchmarks and comparisons
-- Personal data storytelling tools
+Looking for more photo management projects? Check out:
+- Photo metadata extraction tools
+- Geocoding and location services
+- Map visualization libraries (Leaflet, Mapbox)
+- Chronological data presentation tools
 
 ---
 
-**Built for AI enthusiasts who want to do cool things with multimodal AI, vision models, and personal data storytelling.** 🚀
+**Transform your photo collection into an interactive map-based journey through your locations!** 🗺️
 
-*Transform your photo collection into an AI-generated life story today!*
+*Follow your path through time and space with image galleries at each location.*
